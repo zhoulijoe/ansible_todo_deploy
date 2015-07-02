@@ -1,0 +1,23 @@
+---
+
+# Temporary hack to symlink to war file in local build dir
+- name: remove default tomcat site dir
+  file:
+    path: /var/lib/tomcat7/webapps/ROOT
+    state: absent
+
+- name: link local build war file
+  file:
+    path: /var/lib/tomcat7/webapps/todo.war
+    src: /home/vagrant/todo_server/todo-server-0.0.1.war
+    state: link
+  notify: restart tomcat7
+
+- name: generate apache site config
+  template:
+    src: etc/apache2/sites-available/todo-server.conf.j2
+    dest: /etc/apache2/sites-available/todo-server.conf
+
+- name: enable todo api apache site
+  command: a2ensite todo-server
+  notify: restart apache2

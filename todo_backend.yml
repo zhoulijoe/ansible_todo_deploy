@@ -1,5 +1,4 @@
 ---
-# master playbook for complete deployment
 
 - hosts: all
   roles:
@@ -11,4 +10,7 @@
 
 - hosts: webserver
   roles:
-    - todo
+    - java
+    - tomcat
+    - apache
+    - todo_api
