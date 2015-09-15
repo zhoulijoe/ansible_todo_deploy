@@ -2,7 +2,7 @@
 
 - name: generate mod jk worker property
   template:
-    src: etc/libapache2-mod-jk/workers.properties.j2
+    src: workers.properties.j2
     dest: /etc/libapache2-mod-jk/workers.properties
   notify: restart apache2
 
